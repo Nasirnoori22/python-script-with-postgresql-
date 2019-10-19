@@ -4,9 +4,7 @@ import psycopg2.extras
 
 class FilmScript:
     def __init__(self):
-
 	    self.workbook = xlsxwriter.Workbook('Filmsandactor.xlsx')
-
 	    self.worksheet = self.workbook.add_worksheet("FilmandActor")
 	    self.worksheet.write_row('A1', ["Film title", "actor First name", "A last name", "F language"])
 	    self.row = 1
@@ -19,12 +17,9 @@ class FilmScript:
                                         port = "5432",
                                         database = "database name"  
                                         )
-
-
         self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         self.cursor.execute("""SELECT  actor_id, film.film_id , language.language_id ,film_actor.last_update return_date from film_actor  INNER JOIN film on film_actor.film_id = film.film_id 
             inner join language on film.language_id = language.language_id """) 
-
 
         film_actor = self.cursor.fetchall()
         for films_actor in film_actor:
@@ -44,7 +39,8 @@ class FilmScript:
                 self.worksheet.write_row(self.row, self.col, [film_title['title'], actor_all['first_name'], actor_all['last_name'], language_id['name'] ])
                 self.row += 1
             else:
-                print("noting to Fetch")    
+                print("noting to Fetch") 
+		
 obj = FilmScript()
 obj.TestConnection()
 obj.workbook.close()
