@@ -14,10 +14,10 @@ class FilmScript:
 
     def TestConnection(self):
         self.connection = psycopg2.connect(user = "nasir",
-                                        password = "nasir@123",
+                                        password = "your password",
                                         host = "localhost",
                                         port = "5432",
-                                        database = "nasir"  
+                                        database = "database name"  
                                         )
 
 
